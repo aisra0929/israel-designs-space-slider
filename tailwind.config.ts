@@ -47,43 +47,74 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
+        // ISRAEL DESIGNS Brand Colors
+        "brand-primary": "hsl(var(--brand-primary))",
+        "brand-secondary": "hsl(var(--brand-secondary))", 
+        "brand-accent": "hsl(var(--brand-accent))",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        'brand': ['Inter', 'sans-serif'],
+      },
+      boxShadow: {
+        'soft': 'var(--shadow-soft)',
+        'float': 'var(--shadow-float)',
+        'glow': '0 0 40px hsl(var(--brand-primary) / 0.4)',
+      },
+      transitionTimingFunction: {
+        'smooth': 'cubic-bezier(0.25, 0.8, 0.25, 1)',
+        'spring': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+      },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px) rotate(0deg)" },
+          "50%": { transform: "translateY(-20px) rotate(2deg)" },
+        },
+        "brandReveal": {
           from: {
-            height: "var(--radix-accordion-content-height)",
+            opacity: "0",
+            transform: "translateY(50px) scale(0.8)",
+            filter: "blur(10px)",
           },
           to: {
-            height: "0",
+            opacity: "1", 
+            transform: "translateY(0) scale(1)",
+            filter: "blur(0)",
           },
+        },
+        "brandSlide": {
+          to: { transform: "translate(-40vw, -40vh) scale(0.4)" },
+        },
+        "parallaxSlide": {
+          from: { transform: "translateX(100%)" },
+          to: { transform: "translateX(0)" },
+        },
+        "shimmer": {
+          "0%": { "background-position": "-200% 0" },
+          "100%": { "background-position": "200% 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        'float': 'float 6s ease-in-out infinite',
+        'float-delayed': 'float 8s ease-in-out infinite 2s',
+        'brand-reveal': 'brandReveal 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
+        'brand-slide': 'brandSlide 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards 2.5s',
+        'parallax-slide': 'parallaxSlide 0.6s ease-out forwards',
+        'shimmer': 'shimmer 2s linear infinite',
       },
     },
   },
