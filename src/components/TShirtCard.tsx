@@ -50,21 +50,13 @@ const TShirtCard = ({ product, onClick }: TShirtCardProps) => {
         transition: transform ? 'none' : 'transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)',
       }}
     >
-      {/* Floating T-shirt with transparent background */}
+      {/* Floating product with transparent background - no visible card frame */}
       <div className="relative w-full h-full perspective-1000">
-        {/* Background glow effect - only visible on hover */}
-        <div 
-          className={`
-            absolute inset-0 bg-gradient-to-br from-brand-primary/20 via-transparent to-brand-secondary/20 
-            rounded-2xl transition-opacity duration-500 blur-xl scale-110
-            ${isHovered ? 'opacity-100' : 'opacity-0'}
-          `}
-        />
         
-        {/* T-shirt image container */}
+        {/* Product image container - floating in space */}
         <div className="relative w-full h-full flex items-center justify-center">
           <div className="relative w-64 h-80">
-            {/* Shadow/reflection beneath t-shirt */}
+            {/* Shadow/reflection beneath product */}
             <div 
               className={`
                 absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8
@@ -74,7 +66,7 @@ const TShirtCard = ({ product, onClick }: TShirtCardProps) => {
               `}
             />
             
-            {/* T-shirt image */}
+            {/* Product image */}
             <img
               src={product.image}
               alt={product.name}
@@ -100,7 +92,7 @@ const TShirtCard = ({ product, onClick }: TShirtCardProps) => {
           </div>
         </div>
         
-        {/* Product info overlay */}
+        {/* Product info overlay - appears on hover */}
         <div 
           className={`
             absolute bottom-4 left-4 right-4 glass p-4 rounded-xl
@@ -115,11 +107,6 @@ const TShirtCard = ({ product, onClick }: TShirtCardProps) => {
             {product.price}
           </p>
         </div>
-        
-        {/* Hover ripple effect */}
-        {isHovered && (
-          <div className="absolute inset-0 rounded-2xl border border-brand-primary/30 animate-ping" />
-        )}
       </div>
     </div>
   );

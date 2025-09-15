@@ -7,11 +7,15 @@ import ProductModal from '@/components/ProductModal';
 import AboutPage from '@/components/AboutPage';
 import ContactPage from '@/components/ContactPage';
 
-// Import T-shirt images
+// Import product images
 import tshirt1 from '@/assets/tshirt-1.png';
 import tshirt2 from '@/assets/tshirt-2.png';
 import tshirt3 from '@/assets/tshirt-3.png';
 import tshirt4 from '@/assets/tshirt-4.png';
+import hoodie1 from '@/assets/hoodie-1.png';
+import hoodie2 from '@/assets/hoodie-2.png';
+import sweatpants1 from '@/assets/sweatpants-1.png';
+import sweatpants2 from '@/assets/sweatpants-2.png';
 
 interface Product {
   id: number;
@@ -19,6 +23,7 @@ interface Product {
   price: string;
   image: string;
   description: string;
+  category: 'T-shirts' | 'Hoodies' | 'Sweatpants';
 }
 
 const Index = () => {
@@ -26,14 +31,17 @@ const Index = () => {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<'T-shirts' | 'Hoodies' | 'Sweatpants'>('T-shirts');
 
-  // Product data with generated T-shirt images
+  // Product data with all clothing categories
   const products: Product[] = [
+    // T-shirts
     {
       id: 1,
       name: "Essential Black Tee",
       price: "$49",
       image: tshirt1,
+      category: 'T-shirts',
       description: "Our signature black tee crafted from premium organic cotton. Minimalist design meets maximum comfort in this timeless piece that forms the foundation of any modern wardrobe."
     },
     {
@@ -41,6 +49,7 @@ const Index = () => {
       name: "Pure White Essential",
       price: "$49",
       image: tshirt2,
+      category: 'T-shirts',
       description: "Clean, crisp, and endlessly versatile. This white tee embodies our philosophy of refined simplicity, featuring superior fabric quality and a perfect fit that elevates any look."
     },
     {
@@ -48,6 +57,7 @@ const Index = () => {
       name: "Ocean Blue Minimal",
       price: "$52",
       image: tshirt3,
+      category: 'T-shirts',
       description: "A sophisticated navy that speaks volumes without saying a word. This premium tee combines deep color saturation with our signature soft-touch finish for effortless style."
     },
     {
@@ -55,23 +65,47 @@ const Index = () => {
       name: "Storm Gray Classic",
       price: "$52",
       image: tshirt4,
+      category: 'T-shirts',
       description: "Understated elegance in a contemporary gray tone. Perfect for the modern minimalist, this tee offers versatility and comfort in equal measure."
     },
+    // Hoodies
     {
       id: 5,
-      name: "Midnight Black Pro",
-      price: "$59",
-      image: tshirt1,
-      description: "The ultimate in premium basics. Enhanced with moisture-wicking technology and reinforced seams, this is where performance meets style in perfect harmony."
+      name: "Midnight Black Hoodie",
+      price: "$89",
+      image: hoodie1,
+      category: 'Hoodies',
+      description: "Premium heavyweight hoodie crafted from organic cotton blend. Features a relaxed fit with ribbed cuffs and hem for ultimate comfort and style."
     },
     {
       id: 6,
-      name: "Arctic White Luxe",
-      price: "$59",
-      image: tshirt2,
-      description: "Luxury redefined in pure white. Featuring our finest cotton blend and precision construction, this tee represents the pinnacle of contemporary casual wear."
+      name: "Arctic White Hoodie",
+      price: "$89",
+      image: hoodie2,
+      category: 'Hoodies',
+      description: "Clean and minimalist hoodie design in pure white. Soft fleece interior meets durable exterior for the perfect balance of comfort and longevity."
+    },
+    // Sweatpants
+    {
+      id: 7,
+      name: "Navy Comfort Sweats",
+      price: "$69",
+      image: sweatpants1,
+      category: 'Sweatpants',
+      description: "Tailored sweatpants that redefine casual wear. Featuring a contemporary fit with tapered legs and premium cotton-poly blend for all-day comfort."
+    },
+    {
+      id: 8,
+      name: "Gray Minimalist Sweats",
+      price: "$69",
+      image: sweatpants2,
+      category: 'Sweatpants',
+      description: "Elevated essentials in sophisticated gray. These sweatpants combine streetwear aesthetics with premium materials for effortless style."
     }
   ];
+
+  // Filter products by category
+  const filteredProducts = products.filter(product => product.category === selectedCategory);
 
   const handleLandingComplete = () => {
     setShowLanding(false);
@@ -130,17 +164,47 @@ const Index = () => {
                 <h2 className="text-4xl md:text-6xl font-light mb-6 text-foreground">
                   The Collection
                 </h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
                   Each piece is crafted with precision, designed for the future, and built to last forever.
                 </p>
+                
+                {/* Category Filter Dropdown */}
+                <div className="flex justify-center mb-12">
+                  <select
+                    value={selectedCategory}
+                    onChange={(e) => setSelectedCategory(e.target.value as 'T-shirts' | 'Hoodies' | 'Sweatpants')}
+                    className="glass px-6 py-3 rounded-xl text-lg font-medium text-foreground bg-background/50 border border-border/20 focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition-all duration-300"
+                  >
+                    <option value="T-shirts">T-shirts</option>
+                    <option value="Hoodies">Hoodies</option>
+                    <option value="Sweatpants">Sweatpants</option>
+                  </select>
+                </div>
               </div>
               
               {/* Horizontal Parallax Slider */}
               <div className="relative">
                 <HorizontalSlider 
-                  products={products} 
+                  products={filteredProducts} 
                   onProductClick={handleProductClick}
                 />
+              </div>
+              
+              {/* Show all categories in The Collection */}
+              <div className="mt-20">
+                <div className="text-center mb-16">
+                  <h3 className="text-3xl md:text-4xl font-light mb-6 text-foreground">
+                    All Collections
+                  </h3>
+                </div>
+                
+                {/* Display all products from all categories */}
+                <div className="relative">
+                  <HorizontalSlider 
+                    products={products} 
+                    onProductClick={handleProductClick}
+                  />
+                </div>
               </div>
             </div>
 

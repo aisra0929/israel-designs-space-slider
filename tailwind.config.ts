@@ -97,6 +97,29 @@ export default {
         "brandSlide": {
           to: { transform: "translate(-40vw, -40vh) scale(0.4)" },
         },
+        "brandSlideNav": {
+          to: { transform: "translate(40vw, -40vh) scale(0.3)" },
+        },
+        "splitLeft": {
+          from: { 
+            transform: "translateX(-100vw)",
+            opacity: "0"
+          },
+          to: { 
+            transform: "translateX(0)",
+            opacity: "1"
+          },
+        },
+        "splitRight": {
+          from: { 
+            transform: "translateX(100vw)",
+            opacity: "0"
+          },
+          to: { 
+            transform: "translateX(0)",
+            opacity: "1"
+          },
+        },
         "parallaxSlide": {
           from: { transform: "translateX(100%)" },
           to: { transform: "translateX(0)" },
@@ -113,6 +136,9 @@ export default {
         'float-delayed': 'float 8s ease-in-out infinite 2s',
         'brand-reveal': 'brandReveal 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
         'brand-slide': 'brandSlide 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards 2.5s',
+        'brand-slide-nav': 'brandSlideNav 1.5s cubic-bezier(0.25, 0.8, 0.25, 1) forwards 2.5s',
+        'split-left': 'splitLeft 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
+        'split-right': 'splitRight 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards',
         'parallax-slide': 'parallaxSlide 0.6s ease-out forwards',
         'shimmer': 'shimmer 2s linear infinite',
       },
