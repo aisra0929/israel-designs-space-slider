@@ -59,6 +59,7 @@ export default {
       },
       fontFamily: {
         'brand': ['Inter', 'sans-serif'],
+        'condensed': ['Oswald', 'Inter', 'sans-serif'],
       },
       boxShadow: {
         'soft': 'var(--shadow-soft)',
